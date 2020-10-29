@@ -25,27 +25,28 @@
                 <thead>
                     <tr>
                         <th *ngIf="showWeekNumbers || showISOWeekNumbers"></th>
-                        <ng-container *ngIf="!calendarVariables.left.minDate || calendarVariables.left.minDate.isBefore(calendarVariables.left.calendar.firstDay) && (!this.linkedCalendars || true)">
+                        <ng-container *ngIf="!calendarVariables.left.minDate || isBeforeDate(calendarVariables.left.minDate,calendarVariables.left.calendar.firstDay) && (!this.linkedCalendars || true)">
                             <th (click)="clickPrev(sideEnum.left)" class="prev available" >
                             </th>
                         </ng-container>
-                        <ng-container *ngIf="!(!calendarVariables.left.minDate || calendarVariables.left.minDate.isBefore(calendarVariables.left.calendar.firstDay) && (!this.linkedCalendars || true))">
+                        <ng-container *ngIf="!(!calendarVariables.left.minDate || isBeforeDate(calendarVariables.left.minDate,calendarVariables.left.calendar.firstDay) && (!this.linkedCalendars || true))">
                             <th></th>
                         </ng-container>
                         <th colspan="5" class="month drp-animate">
                             <ng-container *ngIf="showDropdowns && calendarVariables.left.dropdowns">
                                 <div class="dropdowns">
-                                        {{this.locale.monthNames[calendarVariables?.left?.calendar[1][1].month()]}}
+                                        {{this.locale.monthNames[getMonthNumber(calendarVariables?.left?.calendar[1][1])]}}
+                                        
                                         <select class="monthselect" (change)="monthChanged($event, sideEnum.left)">
                                                 <option
-                                                [disabled]="(calendarVariables.left.dropdowns.inMinYear && m < calendarVariables.left.minDate.month()) || (calendarVariables.left.dropdowns.inMaxYear && m > calendarVariables.left.maxDate.month())"
+                                                [disabled]="(calendarVariables.left.dropdowns.inMinYear && m < getMonthName(calendarVariables.left.minDate)) || (calendarVariables.left.dropdowns.inMaxYear && m > getMonthNumber(calendarVariables.left.maxDate))"
                                                 *ngFor="let m of calendarVariables.left.dropdowns.monthArrays" [value]="m" [selected]="calendarVariables.left.dropdowns.currentMonth == m">
                                                     {{locale.monthNames[m]}}
                                                 </option>
                                         </select>
                                 </div>
                                 <div class="dropdowns">
-                                    {{ calendarVariables?.left?.calendar[1][1].format(" YYYY")}}
+                                    {{ formatDate(calendarVariables?.left?.calendar[1][1]," yyyy")}}
                                     <select class="yearselect"  (change)="yearChanged($event, sideEnum.left)">
                                         <option *ngFor="let y of calendarVariables.left.dropdowns.yearArrays" [selected]="y === calendarVariables.left.dropdowns.currentYear">
                                             {{y}}
@@ -54,7 +55,7 @@
                                 </div>
                             </ng-container>
                             <ng-container *ngIf="!showDropdowns || !calendarVariables.left.dropdowns">
-                                    {{this.locale.monthNames[calendarVariables?.left?.calendar[1][1].month()]}}  {{ calendarVariables?.left?.calendar[1][1].format(" YYYY")}}
+                                    {{this.locale.monthNames[getMonthNumber(calendarVariables?.left?.calendar[1][1])]}}  {{ formatDate(calendarVariables?.left?.calendar[1][1]," yyyy")}}
                             </ng-container>
                         </th>
                         <ng-container *ngIf="(!calendarVariables.left.maxDate || calendarVariables.left.maxDate.isAfter(calendarVariables.left.calendar.lastDay)) && (!linkedCalendars || singleDatePicker )">
@@ -81,7 +82,7 @@
                         </td>
                         <!-- cal -->
                         <td *ngFor="let col of calendarVariables.left.calCols" [class]="calendarVariables.left.classes[row][col]" (click)="clickDate($event, sideEnum.left, row, col)" (mouseenter)="hoverDate($event, sideEnum.left, row, col)">
-                            <span>{{calendarVariables.left.calendar[row][col].date()}}</span>
+                            <span>{{getDate(calendarVariables.left.calendar[row][col])}}</span>
                         </td>
                     </tr>
                 </tbody>
@@ -131,27 +132,27 @@
                 <thead>
                     <tr>
                         <th *ngIf="showWeekNumbers || showISOWeekNumbers"></th>
-                        <ng-container *ngIf="(!calendarVariables.right.minDate || calendarVariables.right.minDate.isBefore(calendarVariables.right.calendar.firstDay)) && (!this.linkedCalendars)">
+                        <ng-container *ngIf="(!calendarVariables.right.minDate || isBeforeDate(calendarVariables.right.minDate,calendarVariables.right.calendar.firstDay)) && (!this.linkedCalendars)">
                             <th (click)="clickPrev(sideEnum.right)" class="prev available" >
                             </th>
                         </ng-container>
-                        <ng-container *ngIf="!((!calendarVariables.right.minDate || calendarVariables.right.minDate.isBefore(calendarVariables.right.calendar.firstDay)) && (!this.linkedCalendars))">
+                        <ng-container *ngIf="!((!calendarVariables.right.minDate || isBeforeDate(calendarVariables.right.minDate,calendarVariables.right.calendar.firstDay)) && (!this.linkedCalendars))">
                             <th></th>
                         </ng-container>
                         <th colspan="5" class="month">
                             <ng-container *ngIf="showDropdowns && calendarVariables.right.dropdowns">
                                 <div class="dropdowns">
-                                    {{this.locale.monthNames[calendarVariables?.right?.calendar[1][1].month()]}}
+                                    {{this.locale.monthNames[getMonthNumber(calendarVariables?.right?.calendar[1][1])]}}
                                     <select class="monthselect" (change)="monthChanged($event, sideEnum.right)">
                                             <option
-                                            [disabled]="(calendarVariables.right.dropdowns.inMinYear && calendarVariables.right.minDate && m < calendarVariables.right.minDate.month()) || (calendarVariables.right.dropdowns.inMaxYear && calendarVariables.right.maxDate && m > calendarVariables.right.maxDate.month())"
+                                            [disabled]="(calendarVariables.right.dropdowns.inMinYear && calendarVariables.right.minDate && m < getMonthNumber(calendarVariables.right.minDate)) || (calendarVariables.right.dropdowns.inMaxYear && calendarVariables.right.maxDate && m > getMonthNumber(calendarVariables.right.maxDate))"
                                             *ngFor="let m of calendarVariables.right.dropdowns.monthArrays" [value]="m" [selected]="calendarVariables.right.dropdowns.currentMonth == m">
                                                 {{locale.monthNames[m]}}
                                             </option>
                                     </select>
                                 </div>
                                 <div class="dropdowns">
-                                        {{ calendarVariables?.right?.calendar[1][1].format(" YYYY")}}
+                                        {{ formatDate(calendarVariables?.right?.calendar[1][1]," yyyy")}}
                                         <select class="yearselect" (change)="yearChanged($event, sideEnum.right)">
                                         <option *ngFor="let y of calendarVariables.right.dropdowns.yearArrays" [selected]="y === calendarVariables.right.dropdowns.currentYear">
                                             {{y}}
@@ -160,7 +161,7 @@
                                 </div>
                             </ng-container>
                             <ng-container *ngIf="!showDropdowns || !calendarVariables.right.dropdowns">
-                                    {{this.locale.monthNames[calendarVariables?.right?.calendar[1][1].month()]}}  {{ calendarVariables?.right?.calendar[1][1].format(" YYYY")}}
+                                    {{this.locale.monthNames[getMonthNumber(calendarVariables?.right?.calendar[1][1])]}}  {{ formatDate(calendarVariables?.right?.calendar[1][1]," yyyy")}}
                             </ng-container>
                         </th>
                             <ng-container *ngIf="!calendarVariables.right.maxDate || calendarVariables.right.maxDate.isAfter(calendarVariables.right.calendar.lastDay) && (!linkedCalendars || singleDatePicker || true)">
@@ -180,13 +181,13 @@
                 <tbody>
                     <tr *ngFor="let row of calendarVariables.right.calRows" [class]="calendarVariables.right.classes[row].classList">
                         <td class="week" *ngIf="showWeekNumbers">
-                            <span>{{calendarVariables.right.calendar[row][0].week()}}</span>
+                            <span>{{getWeekNumber(calendarVariables.right.calendar[row][0])}}</span>
                         </td>
                         <td class="week" *ngIf="showISOWeekNumbers">
-                            <span>{{calendarVariables.right.calendar[row][0].isoWeek()}}</span>
+                            <span>{{isoWeekNumber(calendarVariables.right.calendar[row][0])}}</span>
                         </td>
                         <td *ngFor="let col of calendarVariables.right.calCols" [class]="calendarVariables.right.classes[row][col]" (click)="clickDate($event, sideEnum.right, row, col)" (mouseenter)="hoverDate($event, sideEnum.right, row, col)">
-                            <span>{{calendarVariables.right.calendar[row][col].date()}}</span>
+                            <span>{{getDate(calendarVariables.right.calendar[row][col])}}</span>
                         </td>
                     </tr>
                 </tbody>

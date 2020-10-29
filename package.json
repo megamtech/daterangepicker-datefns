@@ -1,7 +1,7 @@
 {
-  "name": "ngx-daterangepicker-material",
-  "version": "4.0.1",
-  "description": "Angular 9 and 10 date range picker (with material design theme)",
+  "name": "ngx-datepicker",
+  "version": "0.0.1",
+  "description": "Angular date picker ",
   "keywords": [
     "angular2",
     "angular4",
@@ -21,7 +21,7 @@
     "moment",
     "picker"
   ],
-  "homepage": "https://github.com/fetrarij/ngx-daterangepicker-material",
+  "homepage": "https://labs.megamtech.com/megamtech-labs/ngx-datepicker/-/wikis",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -36,13 +36,13 @@
     "gh-pages": "ng build --prod --base-href=\"/ngx-daterangepicker-material/\" && ngh --dir demo/dist",
     "build": "ng-packagr -p package.json"
   },
-  "author": "Fetrarijaona R.",
+  "author": "Megam Technologies.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fetrarij/ngx-daterangepicker-material.git"
+    "url": "http://labs.megamtech.com/megamtech-labs/ngx-datepicker.git"
   },
   "peerDependencies": {
-    "moment": "^2.21.0"
+    "date-fns": "^2.16.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.0",
@@ -87,7 +87,7 @@
     "lib": {
       "entryFile": "src/daterangepicker/index.ts",
       "umdModuleIds": {
-        "moment": "moment"
+        "date-fns": "date-fns"
       }
     },
     "dest": "dist"

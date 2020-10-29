@@ -8,16 +8,16 @@ import { DaterangepickerComponent, DaterangepickerDirective } from '../../../../
   styleUrls: ['./simple.component.scss']
 })
 export class SimpleComponent implements OnInit {
-  selected: {startDate: moment.Moment, endDate: moment.Moment};
+  selected: {startDate: any, endDate: any};
   @ViewChild(DaterangepickerDirective, { static: true }) pickerDirective: DaterangepickerDirective;
   inlineDate: any;
   inlineDateTime: any;
   picker: DaterangepickerComponent;
   constructor() {
-    this.selected = {
-      startDate: moment('2015-11-18T00:00Z'),
-      endDate: moment('2015-11-26T00:00Z')
-    }
+    // this.selected = {
+    //   startDate: new Date(),
+    //   endDate: new Date()
+    // }
    }
 
   ngOnInit() {
