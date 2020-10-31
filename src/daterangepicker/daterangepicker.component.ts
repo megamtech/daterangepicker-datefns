@@ -141,7 +141,7 @@ export class DaterangepickerComponent implements OnInit {
     rightCalendar: any = {};
     showCalInRanges: Boolean = false;
     nowHoveredDate = null;
-    pickingDate: boolean = false;
+    pickingDate = false;
     options: any = {}; // should get some opt from user
     @Input() drops: string;
     @Input() opens: string;
@@ -169,23 +169,24 @@ export class DaterangepickerComponent implements OnInit {
         this._buildLocale();
         const daysOfWeek = [...this.locale.daysOfWeek];
         this.locale.firstDay = this.locale.firstDay % 7;
-        if (this.locale.firstDay !== 0) {
-            let iterator = this.locale.firstDay;
+        // if (this.locale.firstDay !== 0) {
+        //     let iterator = this.locale.firstDay;
 
-            while (iterator > 0) {
-                daysOfWeek.push(daysOfWeek.shift());
-                iterator--;
-            }
-        }
+        //     while (iterator > 0) {
+        //         daysOfWeek.push(daysOfWeek.shift());
+        //         iterator--;
+        //     }
+        // }
 
         this.locale.daysOfWeek = daysOfWeek;
+        console.log(this.locale.daysOfWeek);
         if (this.inline) {
             this._old.start = this.startDate;
             this._old.end = this.endDate;
         }
 
         if (this.startDate && this.timePicker) {
-            console.log(this.startDate)
+            console.log(this.startDate);
             this.setStartDate(this.startDate);
             this.renderTimePicker(SideEnum.left);
         }
@@ -223,8 +224,8 @@ export class DaterangepickerComponent implements OnInit {
                     if (this.minDate && start.isBefore(this.minDate)) {
                         start = this.minDate;
                     }
-                    let maxDate = this.maxDate;
-                    //TODO CHECK maxSpan not used
+                    const maxDate = this.maxDate;
+                    // TODO CHECK maxSpan not used
                     // if (this.maxSpan && maxDate && add(start,this.maxSpan).isAfter(maxDate)) {
                     //     maxDate = add(start.clone().add(this.maxSpan);
                     // }
@@ -233,8 +234,8 @@ export class DaterangepickerComponent implements OnInit {
                     }
                     // If the end of the range is before the minimum or the start of the range is
                     // after the maximum, don't display this range option at all.
-                    if (this.minDate && isBefore(end, this.minDate)) { this.timePicker ? 'minute' : 'day' }
-                    if (maxDate && isAfter(start, maxDate)) { this.timePicker ? 'minute' : 'day' }
+                    if (this.minDate && isBefore(end, this.minDate)) { this.timePicker ? 'minute' : 'day'; }
+                    if (maxDate && isAfter(start, maxDate)) { this.timePicker ? 'minute' : 'day'; }
                     // Support unicode chars in the range names.
                     const elem = document.createElement('textarea');
                     elem.innerHTML = range;
@@ -273,7 +274,7 @@ export class DaterangepickerComponent implements OnInit {
             // don't have an end date, use the start date then put the selected time for the right side as the time
             selected = this._getDateWithTime(this.startDate, SideEnum.right);
             if (selected.isBefore(this.startDate)) {
-                selected = this.startDate;  //set it back to the start date the time was backwards
+                selected = this.startDate;  // set it back to the start date the time was backwards
             }
             minDate = this.startDate;
         }
@@ -388,9 +389,9 @@ export class DaterangepickerComponent implements OnInit {
         const hour = getHours(mainCalendar.month);
         const minute = getMinutes(mainCalendar.month);
         const second = getSeconds(mainCalendar.month);
-        //CROSS checking
+        // CROSS checking
         const daysInMonth = getDaysInMonth(new Date(year, month));
-        //CROSS checking
+        // CROSS checking
         const firstDay = new Date(year, month, 1);
         const lastDay = new Date(year, month, daysInMonth);
         const lastMonth = getMonth(sub(firstDay, { 'months': 1 }));
@@ -426,7 +427,7 @@ export class DaterangepickerComponent implements OnInit {
             }
 
             calendar[row][col] = setSeconds(setMinutes(setHours(curDate, hour), minute), second);
-            curDate = setHours(curDate, 12)
+            curDate = setHours(curDate, 12);
             // curDate.hour();
 
             if (this.minDate && format(calendar[row][col], 'yyyy-MM-dd') === format(this.minDate, 'yyyy-MM-dd') &&
@@ -516,7 +517,10 @@ export class DaterangepickerComponent implements OnInit {
 
         if (typeof startDate === 'object') {
             this.pickingDate = true;
-            this.startDate = parseISO(startDate);
+            //TODO FIX
+            this.startDate = startDate;
+            // this.startDate = parseISO(startDate);
+            console.log('this.startDate==>', this.startDate);
         }
         if (!this.timePicker) {
             this.pickingDate = true;
@@ -524,7 +528,7 @@ export class DaterangepickerComponent implements OnInit {
         }
 
         if (this.timePicker && this.timePickerIncrement) {
-            this.startDate = setMinutes(this.startDate, Math.round(getMinutes(this.startDate) / this.timePickerIncrement) * this.timePickerIncrement)
+            this.startDate = setMinutes(this.startDate, Math.round(getMinutes(this.startDate) / this.timePickerIncrement) * this.timePickerIncrement);
             // this.startDate.minute(Math.round(this.startDate.minute() / this.timePickerIncrement) * this.timePickerIncrement);
         }
 
@@ -559,7 +563,8 @@ export class DaterangepickerComponent implements OnInit {
 
         if (typeof endDate === 'object') {
             this.pickingDate = false;
-            this.endDate = parseISO(endDate);
+            this.endDate = endDate;
+            // this.endDate = parseISO(endDate);
         }
         if (!this.timePicker) {
             this.pickingDate = false;
@@ -614,7 +619,7 @@ export class DaterangepickerComponent implements OnInit {
     }
 
     updateMonthsInView() {
-        console.log("this.leftCalendar", this.leftCalendar);
+        console.log('this.leftCalendar', this.leftCalendar);
         if (this.endDate) {
             // if both dates are visible already, do nothing
             if (!this.singleDatePicker && this.leftCalendar.month && this.rightCalendar.month &&
@@ -745,14 +750,15 @@ export class DaterangepickerComponent implements OnInit {
         if (this.isInvalidDate && this.startDate && this.endDate) {
             // get if there are invalid date between range
             const d = this.startDate;
-            while (isBefore(d, this.endDate)) {
-                if (this.isInvalidDate(d)) {
-                    this.endDate = sub(d, { days: 1 });
-                    this.calculateChosenLabel();
-                    break;
-                }
-                add(d, { 'days': 1 });
-            }
+            //TODO FIX
+            // while (isBefore(d, this.endDate)) {
+                // if (this.isInvalidDate(d)) {
+                //     this.endDate = sub(d, { days: 1 });
+                //     this.calculateChosenLabel();
+                //     break;
+                // }
+                // add(d, { 'days': 1 });
+            // }
         }
         if (this.chosenLabel) {
             this.choosedDate.emit({ chosenLabel: this.chosenLabel, startDate: this.startDate, endDate: this.endDate });
@@ -1226,6 +1232,7 @@ export class DaterangepickerComponent implements OnInit {
         for (let row = 0; row < 6; row++) {
             this.calendarVariables[side].classes[row] = {};
             const rowClasses = [];
+            console.log(this.emptyWeekRowClass);
             if (
                 this.emptyWeekRowClass &&
                 Array.from(Array(7).keys()).some(i => getMonth(calendar[row][i]) !== getMonth(this.calendarVariables[side]))
@@ -1282,12 +1289,12 @@ export class DaterangepickerComponent implements OnInit {
                     classes.push(this.lastMonthDayClass);
                 }
                 // don't allow selection of dates before the minimum date
-                //TODO CHECK, 'day'
+                // TODO CHECK, 'day'
                 if (this.minDate && isBefore(calendar[row][col], this.minDate)) {
                     classes.push('off', 'disabled');
                 }
                 // don't allow selection of dates after the maximum date
-                //TODO CHECK, 'day'
+                // TODO CHECK, 'day'
                 if (this.calendarVariables[side].maxDate && isAfter(calendar[row][col], this.calendarVariables[side].maxDate)) {
                     classes.push('off', 'disabled');
                 }
@@ -1353,31 +1360,36 @@ export class DaterangepickerComponent implements OnInit {
                 }
                 this.calendarVariables[side].classes[row][col] = cname.replace(/^\s+|\s+$/g, '');
             }
+            console.log('side==>', side);
             this.calendarVariables[side].classes[row].classList = rowClasses.join(' ');
         }
     }
     getMonthNumber(date) {
-        if (date != '' || date != null)
-            return getMonth(date)
+        if (date !== '' || date != null) {
+            return getMonth(date);
+        }
     }
     formatDate(date, formatString = 'dd/MM/yyyy') {
-        console.log(date, formatString);
-        if (date != '' || date != null)
-            return format(date, formatString)
+        if (date !== '' || date != null) {
+            return format(date, formatString);
+        }
     }
     isBeforeDate(date1, date2) {
         return isBefore(date1, date2);
     }
     getDate(date) {
-        if (date != '' || date != null)
+        if (date !== '' || date != null) {
             return getDate(date);
+        }
     }
     isoWeekNumber(date) {
-        if (date != '' || date != null)
-            return getWeek(date)
+        if (date !== '' || date != null) {
+            return getWeek(date);
+        }
     }
     getWeekNumber(date) {
-        if (date != '' || date != null)
-        return getISOWeek(date);
+        if (date !== '' || date != null) {
+            return getISOWeek(date);
+        }
     }
 }

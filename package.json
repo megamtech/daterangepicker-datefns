@@ -93,6 +93,7 @@
     "dest": "dist"
   },
   "dependencies": {
+    "date-fns": "^2.16.1",
     "tslib": "^1.10.0"
   }
 }

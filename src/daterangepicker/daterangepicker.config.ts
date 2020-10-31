@@ -1,6 +1,6 @@
 import { InjectionToken, Injector } from '@angular/core';
 import { from } from 'rxjs';
-import {Locale} from 'date-fns'
+import {Locale} from 'date-fns';
 // import * as _moment from 'moment';
 // const moment = _moment;
 
@@ -33,7 +33,7 @@ export const DefaultLocaleConfig: LocaleConfig = {
     cancelLabel: 'Cancel',
     clearLabel: 'Clear',
     customRangeLabel: 'Custom range',
-    daysOfWeek: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-    monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    firstDay: 0
+    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+    monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    firstDay: 1
 };
