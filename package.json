@@ -1,5 +1,5 @@
 {
-  "name": "ngx-datepicker",
+  "name": "@megamtech-labs/ngx-datepicker",
   "version": "0.0.1",
   "description": "Angular date picker ",
   "keywords": [
@@ -18,16 +18,18 @@
     "directive",
     "daterange",
     "date",
-    "moment",
+    "date-fns",
     "picker"
   ],
   "homepage": "https://labs.megamtech.com/megamtech-labs/ngx-datepicker/-/wikis",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "private": false,
+
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4401",
     "demo:build": "ng build --prod",
     "test": "./node_modules/.bin/ng test --watch=false",
     "lint": "ng lint",
@@ -39,7 +41,11 @@
   "author": "Megam Technologies.",
   "repository": {
     "type": "git",
-    "url": "http://labs.megamtech.com/megamtech-labs/ngx-datepicker.git"
+    "url": "http://labs.megamtech.com/megamtech-labs/ngx-datepicker.git",
+    "directory": "projects/ngx-datepicker/"
+  },
+  "publishConfig": {
+    "@megamtech-labs:registry": "https://labs.megamtech.com/api/v4/projects/58/packages/npm/"
   },
   "peerDependencies": {
     "date-fns": "^2.16.1"
@@ -93,7 +99,10 @@
     "dest": "dist"
   },
   "dependencies": {
-    "date-fns": "^2.16.1",
+    
     "tslib": "^1.10.0"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "."
+  ]
 }
