@@ -13,9 +13,9 @@ export class CustomRangesComponent implements OnInit {
   alwaysShowCalendars: boolean;
   showRangeLabelOnInput: boolean;
   keepCalendarOpeningWithRange: boolean;
-  maxDate: moment.Moment;
-  minDate: moment.Moment;
-  invalidDates: moment.Moment[] = [];
+  maxDate: any;
+  minDate: any;
+  invalidDates: any[] = [];
   tooltips = [
     { date: new Date(), text: 'Today is just unselectable' },
     { date: add(new Date(), { 'days': 2 }), text: 'Yeeeees!!!' }
@@ -44,28 +44,29 @@ export class CustomRangesComponent implements OnInit {
     result.push(endOfDay(addOrSubFunc(startDate, { days: intervalEnd })));
     return result;
   }
-  isInvalidDate = (m: moment.Moment) => {
-    return this.invalidDates.some(d => d.isSame(m, 'day'));
+  isInvalidDate = (m: any) => {
+    // return this.invalidDates.some(d => d.isSame(m, 'day'));
   }
-  isTooltipDate = (m: moment.Moment) => {
-    const tooltip = this.tooltips.find(tt => tt.date.isSame(m, 'day'));
+  isTooltipDate = (m: any) => {
+    // const tooltip = this.tooltips.find(tt => tt.date.isSame(m, 'day'));
+    const tooltip = false;
     if (tooltip) {
-      return tooltip.text;
+      // return tooltip.text;
     } else {
       return false;
     }
   }
 
   constructor() {
-    this.maxDate = moment().add(2, 'weeks');
-    this.minDate = moment().subtract(3, 'days');
+    this.maxDate = add(new Date, { 'weeks': 2 });
+    this.minDate = sub(new Date, { 'days': 3 });
 
     this.alwaysShowCalendars = true;
     this.keepCalendarOpeningWithRange = true;
     this.showRangeLabelOnInput = true;
     this.selected = {
-      startDate: moment().subtract(1, 'days').set({ hours: 0, minutes: 0 }),
-      endDate: moment().subtract(1, 'days').set({ hours: 23, minutes: 59 })
+      startDate: startOfDay(sub(new Date, { 'days': 1 })),
+      endDate: endOfDay(sub(new Date, { 'days': 1 }))
     };
   }
   rangeClicked(range) {
