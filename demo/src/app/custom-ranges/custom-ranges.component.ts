@@ -21,19 +21,17 @@ export class CustomRangesComponent implements OnInit {
     { date: add(new Date(), { 'days': 2 }), text: 'Yeeeees!!!' }
   ];
   inlineDateTime;
-  ranges: any = {
-    Today: [startOfDay(new Date()), endOfDay(new Date())],
-    Yesterday: [startOfDay(sub(new Date, { 'days': 1 })), endOfDay(sub(new Date, { 'days': 1 }))],
-    'Last 7 Days': [startOfDay(sub(new Date, { 'days': 7 })), endOfDay(new Date)],
-    'Last 30 Days': [startOfDay(sub(new Date, { 'days': 30 })), endOfDay(new Date)],
-    'This Month': [startOfMonth(new Date), endOfMonth(new Date)],
-    'Last Month': [
-      startOfMonth(sub(new Date, { months: 1 })), endOfMonth(sub(new Date, { months: 1 }))
-    ],
-    'Last 3 Month': [
-      startOfMonth(sub(new Date, { months: 3 })), endOfMonth(sub(new Date, { months: 1 }))
-    ]
-  };
+  currentDate: Date = new Date()
+  ranges: any = [
+    { label: 'Today', start: startOfDay(new Date()), end: endOfDay(new Date()) },
+    { label: 'Yesterday', start: startOfDay(sub(new Date, { 'days': 1 })), end: endOfDay(sub(new Date, { 'days': 1 })) },
+    { label: 'Last 7 Days', start: startOfDay(sub(new Date, { 'days': 7 })), end: endOfDay(new Date()) },
+    { label: 'Last 30 Days', start: startOfDay(sub(new Date, { 'days': 30 })), end: endOfDay(new Date()) },
+    { label: 'This Month', start: startOfMonth(new Date), end: endOfDay(new Date()) },
+    { label: 'Last Month', start: startOfMonth(sub(new Date, { months: 1 })), end: endOfMonth(sub(new Date, { months: 1 })) },
+    { label: 'Last 3 Month', start: startOfMonth(sub(new Date, { months: 3 })), end: endOfMonth(sub(new Date, { months: 1 })) },
+
+  ];
 
   getRange(startDate, intervalStart = 1, intervalEnd = 1, intervalType: any = { 'days': 1 }, addOrSub = '') {
     let result = [];
@@ -65,8 +63,8 @@ export class CustomRangesComponent implements OnInit {
     this.keepCalendarOpeningWithRange = true;
     this.showRangeLabelOnInput = true;
     this.selected = {
-      startDate: startOfDay(sub(new Date, { 'days': 1 })),
-      endDate: endOfDay(sub(new Date, { 'days': 1 }))
+      startDate: startOfDay(new Date),
+      endDate: endOfDay(new Date)
     };
   }
   rangeClicked(range) {
@@ -76,7 +74,12 @@ export class CustomRangesComponent implements OnInit {
     console.log('[datesUpdated] range is : ', range);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // this.ranges.Today[0] = startOfDay(new Date());
+    // this.ranges.Today[1] = endOfDay(new Date());
+    console.log('\\\\\\\\\\\\\\', this.ranges);
+
+  }
   choosedDateTime(e) {
     this.inlineDateTime = e;
   }

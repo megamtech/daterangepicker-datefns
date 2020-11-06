@@ -20,13 +20,12 @@ import {
 } from '@angular/core';
 import { DaterangepickerComponent } from './daterangepicker.component';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import * as _moment from 'moment';
 import { LocaleConfig } from './daterangepicker.config';
 import { LocaleService } from './locale.service';
-const moment = _moment;
+import { format } from 'date-fns';
 
 @Directive({
-  selector: 'input[ngxDaterangepickerMd]',
+  selector: 'input[ngxDaterangepicker]',
   host: {
     '(keyup.esc)': 'hide()',
     '(blur)': 'onBlur()',
@@ -49,9 +48,9 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
   private _value: any;
   private localeDiffer: KeyValueDiffer<string, any>;
   @Input()
-  minDate: _moment.Moment
+  minDate: any
   @Input()
-  maxDate: _moment.Moment
+  maxDate: any
   @Input()
   autoApply: boolean;
   @Input()
@@ -356,11 +355,11 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
     const dateString = e.target.value.split(this.picker.locale.separator);
     let start = null, end = null;
     if (dateString.length === 2) {
-      start = moment(dateString[0], this.picker.locale.format);
-      end = moment(dateString[1], this.picker.locale.format);
+      start = format(dateString[0], this.picker.locale.format);
+      end = format(dateString[1], this.picker.locale.format);
     }
     if (this.singleDatePicker || start === null || end === null) {
-      start = moment(e.target.value, this.picker.locale.format);
+      start = format(e.target.value, this.picker.locale.format);
       end = start;
     }
     if (!start.isValid() || !end.isValid()) {

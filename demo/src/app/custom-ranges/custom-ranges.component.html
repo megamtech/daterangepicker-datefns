@@ -2,51 +2,39 @@
 
 <div class="row">
   <div class="col s6">
-    <input type="text"
-    ngxDaterangepickerMd
-    [(ngModel)]="selected"
-    [showCustomRangeLabel]="true"
-    [alwaysShowCalendars]="alwaysShowCalendars"
-    [ranges]="ranges"
-    [showClearButton]="true"
-    [showCancel]="true"
-    [linkedCalendars]="true"
-    
-    [locale]="{applyLabel: 'Done'}"
-    (rangeClicked)="rangeClicked($event)"
-    (datesUpdated)="datesUpdated($event)"
-    [keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange"
-    [showRangeLabelOnInput]="showRangeLabelOnInput"
-    class="form-control"
-    placeholder="Select please..."/>
+    <input type="text" ngxDaterangepicker [(ngModel)]="selected" [showCustomRangeLabel]="true"
+      [alwaysShowCalendars]="alwaysShowCalendars" [ranges]="ranges" [showClearButton]="true" [showCancel]="true"
+      [linkedCalendars]="true" [locale]="{applyLabel: 'Done'}" (rangeClicked)="rangeClicked($event)"
+      (datesUpdated)="datesUpdated($event)" [keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange"
+      [showRangeLabelOnInput]="showRangeLabelOnInput" class="form-control" placeholder="Select please..." />
   </div>
   <div class="col s6">
-    <br/>
+    <br />
     <strong>Model: </strong>
-    <br/> {{selected | json  }}
+    <br /> {{selected | json  }}
     <br>
     <label>
-        <input type="checkbox" name="alwaysShowCalendars" [(ngModel)]="alwaysShowCalendars">
-        <span>alwaysShowCalendars: {{alwaysShowCalendars}}</span>
-      </label>
-      <br>
-      <label>
-          <input type="checkbox" name="keepCalendarOpeningWithRange" [(ngModel)]="keepCalendarOpeningWithRange">
-          <span>keepCalendarOpeningWithRange: {{keepCalendarOpeningWithRange}}</span>
-      </label>
-      <br>
-      <label>
-          <input type="checkbox" name="showRangeLabelOnInput" [(ngModel)]="showRangeLabelOnInput">
-          <span>showRangeLabelOnInput: {{showRangeLabelOnInput}}</span>
-        </label>
+      <input type="checkbox" name="alwaysShowCalendars" [(ngModel)]="alwaysShowCalendars">
+      <span>alwaysShowCalendars: {{alwaysShowCalendars}}</span>
+    </label>
+    <br>
+    <label>
+      <input type="checkbox" name="keepCalendarOpeningWithRange" [(ngModel)]="keepCalendarOpeningWithRange">
+      <span>keepCalendarOpeningWithRange: {{keepCalendarOpeningWithRange}}</span>
+    </label>
+    <br>
+    <label>
+      <input type="checkbox" name="showRangeLabelOnInput" [(ngModel)]="showRangeLabelOnInput">
+      <span>showRangeLabelOnInput: {{showRangeLabelOnInput}}</span>
+    </label>
   </div>
 </div>
 
 <div class="row">
   <div class="col s6">
     <b>Html code</b>
-      <pre class="prettyprint"><code class="html">&lt;input type="text"
-  ngxDaterangepickerMd
+    <pre class="prettyprint"><code class="html">&lt;input type="text"
+  ngxDaterangepicker
   [(ngModel)]="selected"
   [showCustomRangeLabel]="true"
   [alwaysShowCalendars]="{{alwaysShowCalendars}}"
@@ -61,21 +49,23 @@
   </div>
   <div class="col s6">
     <b>Typescript code</b>
-      <pre class="prettyprint"><code class="javascript">export class CustomRangesComponent implements OnInit {{ '{' }}
+    <pre class="prettyprint"><code class="javascript">export class CustomRangesComponent implements OnInit {{ '{' }}
 selected: any;
 alwaysShowCalendars: boolean;
-ranges: any = {{ '{' }}
-  'Today': [moment(), moment()],
-  'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-  'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-  'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-  'This Month': [moment().startOf('month'), moment().endOf('month')],
-  'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-}
-invalidDates: moment.Moment[] = [moment().add(2, 'days'), moment().add(3, 'days'), moment().add(5, 'days')];
+{{"ranges: any = [
+    { label: 'Today', start: startOfDay(new Date()), end: endOfDay(new Date()) },
+    { label: 'Yesterday', start: startOfDay(sub(new Date, { 'days': 1 })), end: endOfDay(sub(new Date, { 'days': 1 })) },
+    { label: 'Last 7 Days', start: startOfDay(sub(new Date, { 'days': 7 })), end: endOfDay(new Date()) },
+    { label: 'Last 30 Days', start: startOfDay(sub(new Date, { 'days': 30 })), end: endOfDay(new Date()) },
+    { label: 'This Month', start: startOfMonth(new Date), end: endOfDay(new Date()) },
+    { label: 'Last Month', start: startOfMonth(sub(new Date, { months: 1 })), end: endOfMonth(sub(new Date, { months: 1 })) },
+    { label: 'Last 3 Month', start: startOfMonth(sub(new Date, { months: 3 })), end: endOfMonth(sub(new Date, { months: 1 })) },
+
+  ];"}}
+  {{"invalidDates: Date[] = [add(new Date,{'days':2}), add(new Date,{'days':3}),add(new Date,{'days':5})];"}}
 
 isInvalidDate = (m: moment.Moment) =>  {{'{'}}
-  return this.invalidDates.some(d => d.isSame(m, 'day') )
+  return this.invalidDates.some(d => isSameDay(d,m ) )
 }
 
 constructor() {{ '{' }}
@@ -89,20 +79,13 @@ constructor() {{ '{' }}
 <div class="row">
   <div class="col s12">
     <h3>Inline daterangepicker</h3>
-    <ngx-daterangepicker-material (datesUpdated)="choosedDateTime($event)"
-                                  [autoApply]="true"
-                                  [showCustomRangeLabel]="true"
-                                  [alwaysShowCalendars]="alwaysShowCalendars"
-                                  [ranges]="ranges"
-                                  [showClearButton]="true"
-                                  [showCancel]="true"
-                                  [linkedCalendars]="true"
-                                  [isTooltipDate] = "isTooltipDate"
-                                  [isInvalidDate] = "isInvalidDate"
-                                  [locale]="{applyLabel: 'Done'}"
-                                  [keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange"
-                                  [showRangeLabelOnInput]="showRangeLabelOnInput"
-                                  [locale]="{applyLabel: 'Done', firstDay: 1}"></ngx-daterangepicker-material>
+    <pre>{{ranges|json}}</pre>
+    <ngx-daterangepicker-material (datesUpdated)="choosedDateTime($event)" [autoApply]="true"
+      [showCustomRangeLabel]="true" [alwaysShowCalendars]="alwaysShowCalendars" [ranges]="ranges"
+      [showClearButton]="true" [showCancel]="true" [linkedCalendars]="true" [isTooltipDate]="isTooltipDate"
+      [isInvalidDate]="isInvalidDate" [locale]="{applyLabel: 'Done'}"
+      [keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange" [showRangeLabelOnInput]="showRangeLabelOnInput"
+      [locale]="{applyLabel: 'Done', firstDay: 1}"></ngx-daterangepicker-material>
     <br>
     <p>Choosed date (after changes): {{inlineDateTime | json}}</p>
   </div>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
-import 'moment/locale/fr';
+import { getDay } from 'date-fns';
+import { fr,ru,enGB } from 'date-fns/locale';
+
 import { LocaleConfig } from '../../../../src/daterangepicker';
 // moment.locale('fr', localization);
-
+// window.__localeId__=''
 @Component({
   selector: 'single-datepicker',
   templateUrl: './single-datepicker.component.html',
@@ -14,11 +15,12 @@ export class SingleDatepickerComponent implements OnInit {
   locale: LocaleConfig = {
     applyLabel: 'Appliquer',
     customRangeLabel: ' - ',
-    daysOfWeek:["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-    monthNames:["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    daysOfWeek: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     firstDay: 0,
-    format: 'MM/DD/YYYY', // could be 'YYYY-MM-DDTHH:mm:ss.SSSSZ'
-    displayFormat: 'MM/DD/YYYY', // default is format value
+    format: 'MM/dd/yyyy', // could be 'YYYY-MM-DDTHH:mm:ss.SSSSZ'
+    displayFormat: 'MM/dd/yyyy', // default is format value
+    name:ru
   }
 
   // format: 'MM/DD/YYYY', // could be 'YYYY-MM-DDTHH:mm:ss.SSSSZ'
@@ -37,12 +39,12 @@ export class SingleDatepickerComponent implements OnInit {
   ngOnInit() {
   }
   isInvalidDate(date) {
-    return date.weekday() === 0;
+    return getDay(date) === 0;
   }
   isCustomDate(date) {
-    return  (
-      date.weekday() === 0 || date.weekday() === 6
-    )  ? 'mycustomdate' : false;
+    return (
+      getDay(date) === 0 || getDay(date) === 6
+    ) ? 'mycustomdate' : false;
   }
 
 }

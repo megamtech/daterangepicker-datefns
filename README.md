@@ -30,19 +30,19 @@ Demo: https://fetrarij.github.io/ngx-daterangepicker-material/
 
  `npm install ngx-daterangepicker-material --save` .
 
- import **NgxDaterangepickerMd** in your module:
+ import **ngxDaterangepicker** in your module:
 
 ````typescript
 ...
 import { FormsModule } from '@angular/forms';
-import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { ngxDaterangepicker } from 'ngx-daterangepicker-material';
 import { App } from './app';
 
 @NgModule({
     imports: [
         ... ,
         FormsModule,
-        NgxDaterangepickerMd.forRoot()
+        ngxDaterangepicker.forRoot()
     ],
     declarations: [App],
     bootstrap:    [App]
@@ -55,7 +55,7 @@ export class AppModule {}
 Html:
 
 ```html
-<input type="text" ngxDaterangepickerMd [(ngModel)]="selected" class="form-control"/>
+<input type="text" ngxDaterangepicker [(ngModel)]="selected" class="form-control"/>
 ```
 Typescript:
 
@@ -67,7 +67,7 @@ Html:
 
 ```html
 <input type="text" matInput
-    ngxDaterangepickerMd
+    ngxDaterangepicker
     [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}"
     startKey="start"
     endKey="end"
@@ -145,7 +145,7 @@ Specifiyng `startKey` and `endKey` would have different model:
 
 example:
 ```html
-<input type="text" ngxDaterangepickerMd startKey="start" endKey="end" [(ngModel)]="model">
+<input type="text" ngxDaterangepicker startKey="start" endKey="end" [(ngModel)]="model">
 ```
 
 the model we got would be:  `{start: Date, end: Date}`
@@ -154,7 +154,7 @@ the model we got would be:  `{start: Date, end: Date}`
 
 (object) Set predefined date ranges the user can select from. Each key is the label for the range, and its value an array with two dates representing the bounds of the range. As an example:
 ```html
-<input type="text" ngxDaterangepickerMd startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="model">
+<input type="text" ngxDaterangepicker startKey="start" endKey="end" [ranges]="ranges" [(ngModel)]="model">
 ```
 ```javascript
 ranges: any = {
@@ -183,7 +183,7 @@ You can use bellow options when using the ranges. The default are `false`.
 It is possible to open datepicker from outside. You should create an input with attached datepicker directive and a button with "ngx-daterangepicker-action" class (to prevent triggering of clickOutside).
 ```html
     <input
-      ngxDaterangepickerMd
+      ngxDaterangepicker
       [closeOnAutoApply]="true"
       [autoApply]="true"
       [singleDatePicker]="true"
@@ -251,7 +251,7 @@ You can use theses options:
 
 ### Global locale
 
-For setting the global locale, pass this object to NgxDaterangepickerMd.forRoot().
+For setting the global locale, pass this object to ngxDaterangepicker.forRoot().
 
 eg:
 
@@ -260,7 +260,7 @@ eg:
     imports: [
         ... ,
         FormsModule,
-        NgxDaterangepickerMd.forRoot({
+        ngxDaterangepicker.forRoot({
             separator: ' - ',
             applyLabel: 'Okay',
         })

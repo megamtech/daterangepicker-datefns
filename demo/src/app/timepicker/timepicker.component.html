@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col s6">
     <input type="text"
-    ngxDaterangepickerMd
+    ngxDaterangepicker
     [timePicker]="true"
     [timePickerSeconds]="true"
     [timePickerIncrement]="15"
@@ -16,12 +16,12 @@
   <div class="col s6">
     <b>Html code:</b>
       <pre class="prettyprint"><code class="html">&lt;input type="text"
-    ngxDaterangepickerMd
+    ngxDaterangepicker
     [timePicker]="true"
     [timePickerSeconds]="true"
     [timePickerIncrement]="15"
     [timePicker24Hour]="true"
-    [locale]="{{ '{' }}format: 'DD/MM/YYYY HH:mm:ss', firstDay: 1}"
+    [locale]="{{ '{' }}format: 'dd/MM/yyyy HH:mm:ss', firstDay: 1}"
     [(ngModel)]="selected""/>
     class="form-control"/&gt;</code>
     </pre>
@@ -35,7 +35,7 @@
         constructor() {{ '{' }}
         {{'}'}}
         isInvalidDate(date) {{ '{' }}
-          return date.weekday() === 0;
+          return getDay(date) === 0;
         {{'}'}}</code>
     </pre>
     
