@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col s6">
         <input type="text" matInput
-          ngxDaterangepickerMd
+          ngxDaterangepicker
           [autoApply]="options.autoApply"
           [linkedCalendars]="options.linkedCalendars"
           [singleDatePicker]="options.singleDatePicker"
@@ -40,7 +40,7 @@
           />
     </div>
     <div class="col s6">
-          <strong>Value: </strong>{{selected  | json}}
+          <!-- <strong>Value: </strong>{{selected  | json}} -->
           <hr/>
         <h4>Timepicker</h4>
         <strong>enable timepicker:</strong>  <mat-checkbox [(ngModel)]="timePicker">Value: {{timePicker}}</mat-checkbox><br/>
@@ -55,8 +55,8 @@
         <strong>showISOWeekNumbers:</strong><mat-checkbox [(ngModel)]="options.showISOWeekNumbers">Value: {{options.showISOWeekNumbers}}</mat-checkbox><br/>
         <strong>customRangeDirection:</strong><mat-checkbox [(ngModel)]="options.customRangeDirection">Value: {{options.customRangeDirection}}</mat-checkbox><br/>
         <strong>lockStartDate:</strong><mat-checkbox [(ngModel)]="options.lockStartDate">Value: {{options.lockStartDate}}</mat-checkbox><br/>
-        <strong>minDate:</strong>  {{minDate | date: 'dd/MM/yyyy'}}<br/>
-        <strong>maxDate:</strong>  {{maxDate | date: 'dd/MM/yyyy'}}<br/>
+        <!-- <strong>minDate:</strong>  {{minDate }}<br/>
+        <strong>maxDate:</strong>  {{maxDate }}<br/> -->
         <strong>locale</strong> : <br/>
         <div class="">
           <div class="row">

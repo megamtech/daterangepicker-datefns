@@ -20,14 +20,12 @@ import {
 } from '@angular/core';
 import { DaterangepickerComponent } from './daterangepicker.component';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-// import * as _moment from 'moment';
 import { LocaleConfig } from './daterangepicker.config';
 import { LocaleService } from './locale.service';
 import { format } from 'date-fns';
-// const moment = _moment;
 
 @Directive({
-  selector: 'input[ngxDaterangepickerMd]',
+  selector: 'input[ngxDaterangepicker]',
   host: {
     '(keyup.esc)': 'hide()',
     '(blur)': 'onBlur()',
@@ -50,9 +48,9 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
   private _value: any;
   private localeDiffer: KeyValueDiffer<string, any>;
   @Input()
-  minDate: Date;
+  minDate: any
   @Input()
-  maxDate: Date;
+  maxDate: any
   @Input()
   autoApply: boolean;
   @Input()

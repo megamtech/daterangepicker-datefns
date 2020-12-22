@@ -8,29 +8,29 @@ import { DaterangepickerComponent, DaterangepickerDirective } from '../../../../
   styleUrls: ['./simple.component.scss']
 })
 export class SimpleComponent implements OnInit {
-  selected: {startDate: any, endDate: any};
+  selected: { startDate: any, endDate: any } ;
   @ViewChild(DaterangepickerDirective, { static: true }) pickerDirective: DaterangepickerDirective;
   inlineDate: any;
   inlineDateTime: any;
   picker: DaterangepickerComponent;
   constructor() {
-    // this.selected = {
-    //   startDate: new Date(),
-    //   endDate: new Date()
-    // }
-   }
+    this.selected = {
+      startDate: new Date(),
+      endDate: new Date()
+    }
+  }
 
   ngOnInit() {
     this.picker = this.pickerDirective.picker;
   }
   ngModelChange(e) {
-    console.log({'ngModelChange()': e});
+    console.log({ 'ngModelChange()': e });
   }
   change(e) {
-    console.log({'change()': e});
+    console.log({ 'change()': e });
   }
   choosedDate(e) {
-     this.inlineDate = e;
+    this.inlineDate = e;
   }
 
   choosedDateTime(e) {

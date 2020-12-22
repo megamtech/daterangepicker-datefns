@@ -1,6 +1,6 @@
 {
   "name": "@megamtech-labs/ngx-datepicker",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Angular date picker ",
   "keywords": [
     "angular2",
@@ -26,7 +26,6 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "private": false,
-
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4401",
@@ -99,7 +98,7 @@
     "dest": "dist"
   },
   "dependencies": {
-    
+    "date-fns": "^2.16.1",
     "tslib": "^1.10.0"
   },
   "whitelistedNonPeerDependencies": [
