@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import * as moment from 'moment';
 import { DaterangepickerComponent, DaterangepickerDirective } from '../../../../src/daterangepicker';
 
 @Component({
@@ -8,7 +7,7 @@ import { DaterangepickerComponent, DaterangepickerDirective } from '../../../../
   styleUrls: ['./simple.component.scss']
 })
 export class SimpleComponent implements OnInit {
-  selected: { startDate: any, endDate: any } ;
+  selected: { startDate: any, endDate: any };
   @ViewChild(DaterangepickerDirective, { static: true }) pickerDirective: DaterangepickerDirective;
   inlineDate: any;
   inlineDateTime: any;
@@ -17,7 +16,7 @@ export class SimpleComponent implements OnInit {
     this.selected = {
       startDate: new Date(),
       endDate: new Date()
-    }
+    };
   }
 
   ngOnInit() {

@@ -5,22 +5,17 @@
       <h6>Multi Select</h6>
     </div>
     <div class="col s6">
-        <input type="text" ngxDaterangepicker
-        formControlName="selected" class="form-control" placeholder="Choose date"
-        [showDropdowns]="true"
-        showCancel="true"
-        />
+      <input type="text" ngxDaterangepicker formControlName="selected" class="form-control" placeholder="Choose date"
+        [showDropdowns]="true" [locale]="locale" showCancel="true" />
     </div>
     <div class="col s6">
-      <br/>
-      <button type="button" 
-      class="ngx-daterangepicker-action waves-effect waves-light btn"
-      [ngClass]="{'red': !form.disabled, 'green': form.disabled}"
-      (click)="toggleDisable(form)">
-          {{form.disabled ? 'Enable' : 'Disable'}}
+      <br />
+      <button type="button" class="ngx-daterangepicker-action waves-effect waves-light btn"
+        [ngClass]="{'red': !form.disabled, 'green': form.disabled}" (click)="toggleDisable(form)">
+        {{form.disabled ? 'Enable' : 'Disable'}}
       </button>
       &nbsp;
-      <button type="submit" class="ngx-daterangepicker-action waves-effect waves-light btn" >Submit</button>
+      <button type="submit" class="ngx-daterangepicker-action waves-effect waves-light btn">Submit</button>
       &nbsp;
     </div>
   </div>
@@ -32,18 +27,12 @@
       <h6>Single Select</h6>
     </div>
     <div class="col s6">
-        <input type="text" ngxDaterangepicker
-        formControlName="selected" class="form-control" placeholder="Choose date"
-        [showDropdowns]="true"
-        [singleDatePicker]="true"
-        [locale]="locale"
-        showCancel="true"
-        />
+      <input type="text" ngxDaterangepicker formControlName="selected" class="form-control" placeholder="Choose date"
+        [showDropdowns]="true" [singleDatePicker]="true" [locale]="locale" showCancel="true" />
     </div>
     <div class="col s6">
-      <br/>
-      <button type="submit" class="ngx-daterangepicker-action waves-effect waves-light btn" >Submit</button>
+      <br />
+      <button type="submit" class="ngx-daterangepicker-action waves-effect waves-light btn">Submit</button>
     </div>
   </div>
 </form>
-

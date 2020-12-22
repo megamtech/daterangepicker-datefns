@@ -7,9 +7,9 @@
     'double': !singleDatePicker && showCalInRanges,
     'show-ranges': rangesArray.length
 }" [class]="'drops-' + drops + '-' + opens">
-    <div class="ranges ">
+    <div class="ranges " *ngIf="rangesArray.length>0">
         <ul>
-            
+
             <li *ngFor="let range of rangesArray">
                 <button type="button" (click)="clickRange($event, range)" [disabled]="disableRange(range)"
                     [ngClass]="{'active': range.label === chosenRange}">{{range.label}}</button>
@@ -61,12 +61,12 @@
                             </ng-container>
                         </th>
                         <ng-container
-                            *ngIf="(!calendarVariables.left.maxDate || calendarVariables.left.maxDate.isAfter(calendarVariables.left.calendar.lastDay)) && (!linkedCalendars || singleDatePicker )">
+                            *ngIf="(!calendarVariables.left.maxDate || isAfterDate(calendarVariables.left.maxDate,calendarVariables.left.calendar.lastDay)) && (!linkedCalendars || singleDatePicker )">
                             <th class="next available" (click)="clickNext(sideEnum.left)">
                             </th>
                         </ng-container>
                         <ng-container
-                            *ngIf="!((!calendarVariables.left.maxDate || calendarVariables.left.maxDate.isAfter(calendarVariables.left.calendar.lastDay)) && (!linkedCalendars || singleDatePicker ))">
+                            *ngIf="!((!calendarVariables.left.maxDate || isAfterDate(calendarVariables.left.maxDate,calendarVariables.left.calendar.lastDay)) && (!linkedCalendars || singleDatePicker ))">
                             <th></th>
                         </ng-container>
                     </tr>
@@ -81,10 +81,10 @@
                         [class]="calendarVariables.left?.classes[row]?.classList">
                         <!-- add week number -->
                         <td class="week" *ngIf="showWeekNumbers">
-                            <span>{{calendarVariables.left.calendar[row][0].week()}}</span>
+                            <span>{{getWeekNumber(calendarVariables.left.calendar[row][0])}}</span>
                         </td>
                         <td class="week" *ngIf="showISOWeekNumbers">
-                            <span>{{calendarVariables.left.calendar[row][0].isoWeek()}}</span>
+                            <span>{{isoWeekNumber(calendarVariables.left.calendar[row][0])}}</span>
                         </td>
                         <!-- cal -->
                         <td *ngFor="let col of calendarVariables.left.calCols"
@@ -184,12 +184,12 @@
                             </ng-container>
                         </th>
                         <ng-container
-                            *ngIf="!calendarVariables.right.maxDate || calendarVariables.right.maxDate.isAfter(calendarVariables.right.calendar.lastDay) && (!linkedCalendars || singleDatePicker || true)">
+                            *ngIf="!calendarVariables.right.maxDate || isAfterDate(calendarVariables.right.maxDate,calendarVariables.right.calendar.lastDay) && (!linkedCalendars || singleDatePicker || true)">
                             <th class="next available" (click)="clickNext(sideEnum.right)">
                             </th>
                         </ng-container>
                         <ng-container
-                            *ngIf="!(!calendarVariables.right.maxDate || calendarVariables.right.maxDate.isAfter(calendarVariables.right.calendar.lastDay) && (!linkedCalendars || singleDatePicker || true))">
+                            *ngIf="!(!calendarVariables.right.maxDate || isAfterDate(calendarVariables.right.maxDate,calendarVariables.right.calendar.lastDay) && (!linkedCalendars || singleDatePicker || true))">
                             <th></th>
                         </ng-container>
                     </tr>

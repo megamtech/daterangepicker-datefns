@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col s6">
     <input type="text" ngxDaterangepicker [(ngModel)]="selected" class="form-control" placeholder="Choose date"
-      [showDropdowns]="true" [lockStartDate]="false" [customRangeDirection]="false" [linkedCalendars]="true"
+      [showDropdowns]="true" [lockStartDate]="true" [customRangeDirection]="false" [linkedCalendars]="true"
       (ngModelChange)="ngModelChange($event)" (change)="change($event)" showCancel="true" />
   </div>
   <div class="col s6 right-align">
@@ -33,6 +33,7 @@
 <div class="row">
   <div class="col s12">
     <h3>Inline daterangepicker</h3>
+    
     <ngx-daterangepicker-material (choosedDate)="choosedDate($event)" [locale]="{applyLabel: 'Done', firstDay: 1}">
     </ngx-daterangepicker-material>
     <br>
@@ -43,14 +44,9 @@
 <div class="row">
   <div class="col s12">
     <h3>Inline daterangepicker with time and auto-apply</h3>
-    <ngx-daterangepicker-material (choosedDate)="choosedDateTime($event)"
-                                  [autoApply]="true"
-                                  [timePicker24Hour]="true"
-                                  [linkedCalendars]="true"
-                                  [startDate]="selected?.startDate"
-                                  [endDate]="selected?.endDate"
-                                  [timePicker]="true"
-                                  [locale]="{applyLabel: 'Done', firstDay: 1}"></ngx-daterangepicker-material>
+    <ngx-daterangepicker-material (choosedDate)="choosedDateTime($event)" [autoApply]="true" [timePicker24Hour]="true"
+      [linkedCalendars]="true" [startDate]="selected?.startDate" [endDate]="selected?.endDate" [timePicker]="true"
+      [locale]="{applyLabel: 'Done', firstDay: 1}"></ngx-daterangepicker-material>
     <br>
     <p>Choosed date (after changes): {{inlineDateTime | json}}</p>
   </div>

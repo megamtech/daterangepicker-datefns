@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LocaleConfig } from '../../../../src/daterangepicker';
 
@@ -12,25 +11,25 @@ export class ReactiveFormComponent {
   form: FormGroup;
   form2: FormGroup;
   locale: LocaleConfig = {
-    format: 'YYYY-MM-DDTHH:mm:ss.SSSSZ',
-    displayFormat: 'YYYY-MM-DD',
+    format: 'yyyy-MM-dd hh:mm:ss ',
+    displayFormat: 'yyyy-MM-dd',
   };
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       selected: [{
-        startDate: moment('2015-11-24T00:00Z'),
-        endDate: moment('2015-11-26T00:00Z')
+        startDate: new Date(2015, 11, 24),
+        endDate: new Date(2015, 11, 26)
       }, Validators.required],
     });
 
     this.form2 = this.fb.group({
       selected: [{
-        startDate: '2019-12-11T18:30:00.000Z',
-        endDate: '2019-12-12T18:29:59.000Z',
+        startDate: new Date(2019, 12, 11, 18, 30),
+        endDate: new Date(2019, 12, 12, 18, 29, 59),
       }, Validators.required],
     });
-   }
+  }
 
   submit() {
     console.log(this.form.value);

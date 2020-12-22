@@ -27,8 +27,8 @@ export class FullComponent implements OnInit {
   minDate: any = sub(new Date(), { 'days': 5 });
   maxDate: any = add(new Date(), { 'months': 2 });
   locale: any = {
-    format: 'YYYY-MM-DDTHH:mm:ss.SSSSZ',
-    displayFormat: 'DD MMMM YYYY HH:mm',
+    format: 'yyyy-MM-dd HH:mm:ss XXX',
+    displayFormat: 'dd MMMM yyyy HH:mm',
     separator: ' To ',
     cancelLabel: 'Cancel',
     applyLabel: 'Okay'

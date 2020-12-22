@@ -37,7 +37,7 @@ import { format } from 'date-fns';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DaterangepickerDirective), multi: true
     }
-]
+  ]
 })
 export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
   public picker: DaterangepickerComponent;
@@ -48,9 +48,9 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
   private _value: any;
   private localeDiffer: KeyValueDiffer<string, any>;
   @Input()
-  minDate: any
+  minDate: any;
   @Input()
-  maxDate: any
+  maxDate: any;
   @Input()
   autoApply: boolean;
   @Input()
@@ -116,7 +116,7 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
   @Input() closeOnAutoApply = true;
   _locale: LocaleConfig = {};
   @Input() set locale(value) {
-    this._locale = {...this._localeService.config, ...value};
+    this._locale = { ...this._localeService.config, ...value };
   }
   get locale(): any {
     return this._locale;
@@ -213,7 +213,7 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
     this.picker.closeOnAutoApply = this.closeOnAutoApply;
   }
 
-  ngOnChanges(changes: SimpleChanges): void  {
+  ngOnChanges(changes: SimpleChanges): void {
     for (const change in changes) {
       if (changes.hasOwnProperty(change)) {
         if (this.notForChangesProperty.indexOf(change) === -1) {
@@ -262,6 +262,7 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
   }
 
   writeValue(value) {
+    console.log(value);
     this.setValue(value);
   }
   registerOnChange(fn) {
@@ -272,7 +273,7 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
   }
   setDisabledState(state: boolean): void {
     this._disabled = state;
-}
+  }
   private setValue(val: any) {
     if (val) {
       this.value = val;
@@ -305,25 +306,25 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
     }
     if (this.opens === 'left') {
       style = {
-          top: containerTop,
-          left: (element.offsetLeft - container.clientWidth + element.clientWidth) + 'px',
-          right: 'auto'
+        top: containerTop,
+        left: (element.offsetLeft - container.clientWidth + element.clientWidth) + 'px',
+        right: 'auto'
       };
     } else if (this.opens === 'center') {
-        style = {
-          top: containerTop,
-          left: (element.offsetLeft  +  element.clientWidth / 2
-                  - container.clientWidth / 2) + 'px',
-          right: 'auto'
-        };
+      style = {
+        top: containerTop,
+        left: (element.offsetLeft + element.clientWidth / 2
+          - container.clientWidth / 2) + 'px',
+        right: 'auto'
+      };
     } else if (this.opens === 'right') {
-        style = {
-          top: containerTop,
-          left: element.offsetLeft  + 'px',
-          right: 'auto'
-        };
+      style = {
+        top: containerTop,
+        left: element.offsetLeft + 'px',
+        right: 'auto'
+      };
     } else {
-      const position = element.offsetLeft  +  element.clientWidth / 2 - container.clientWidth / 2;
+      const position = element.offsetLeft + element.clientWidth / 2 - container.clientWidth / 2;
       if (position < 0) {
         style = {
           top: containerTop,
@@ -332,9 +333,9 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
         };
       } else {
         style = {
-            top: containerTop,
-            left: position + 'px',
-            right: 'auto'
+          top: containerTop,
+          left: position + 'px',
+          right: 'auto'
         };
       }
     }
